@@ -18,6 +18,11 @@
 	function allowDrag(event) {
 		// let the drag happen, and store a reference of the ID of the element we're dragging
 		console.log('started dragging an image: this one - ', event.target.id);
+
+		event.dataTransfer.setData("draggedImg", this.id);
+		// event.dataTransfer.setData("targetTrack", this.dataset.track);
+
+		// set a reference to a data track so i can retrieve it later in the drop
 	}
 
 	function allowDragOver(event) {
@@ -27,6 +32,12 @@
 
 	function allowDrop(event) {
 		console.log('dropped something on me');
+
+		let droppedImage = event.dataTransfer.getData("draggedImg");
+		// let currentTrack = event.dataTransfer.getData('targetTrack');
+
+		event.target.appendChild(document.querySelector(`#${droppedImage}`));
+		//debugger;
 	}
 
 	// click on the bottom buttons to change the puzzle image we're working with
